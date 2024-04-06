@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
+import "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 
 interface IBridge {
     /**
@@ -24,4 +25,7 @@ interface IBridge {
      * @return processed Indicates whether the incoming data was successfully processed.
      */
     function processIncomingData(bytes memory incomingData) external returns (bool processed);
+    function bridgeTokens(IERC20 token, uint amount, uint destinationChainId, address receiveToken, uint nonce) external;
+    function receiveTokens(uint amount, address recipient, uint sourceChainId, address receiveToken, uint nonce, bytes32 messageHash) external;
+    function encodeAssetInformation( asset, amount, to);
 }

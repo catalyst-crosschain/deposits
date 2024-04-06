@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import "./Interfaces/IWormhole.sol";
 import "./Libraries/HashUtils.sol";
 
@@ -34,9 +34,9 @@ contract WormholeMessenger is Ownable {
     event MessageSent(bytes32 indexed message, uint64 sequence);
     event MessageReceived(bytes32 indexed message, uint64 sequence);
 
-    constructor(IWormhole _wormhole, uint8 _commitmentLevel) {
-        wormhole = _wormhole;
-        commitmentLevel = _commitmentLevel;
+    constructor(IWormhole _wormhole, uint8 _commitmentLevel) Ownable(msg.sender) {
+    wormhole = _wormhole;
+    commitmentLevel = _commitmentLevel;
     }
 
     function sendMessage(bytes32 message, uint16 targetChainId) external {

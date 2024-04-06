@@ -40,7 +40,6 @@ contract CrossChainDepositContract {
         emit Deposit(msg.sender, amount, tokenAddress, solanaRecipient);
     }
 
-    // Emergency withdraw in case of any issues (can be removed or modified as per the requirement)
     function emergencyWithdrawETH() external onlyOwner {
         payable(owner).transfer(address(this).balance);
     }
